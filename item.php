@@ -6,7 +6,7 @@ include_once("c_item.php");
 if(isset($_POST["iname"]))
  {   
 
-    $u->item_iname = $_POST["iname"];
+    $u->iname = $_POST["iname"];
     $u->cat_ID = $_POST["category"];
     $u->brand_ID = $_POST["brand"];
     $u->iuprice = $_POST["iuprice"];
@@ -36,6 +36,9 @@ if(isset($_GET['xid']))
         $u->remove($_GET['xid']);
     }
 
+$d = new  item();
+$items = $d->getall();
+
 if(isset($_GET['eid']))
     {
         $u =  $u->getbyid($_GET['eid']);
@@ -44,8 +47,7 @@ if(isset($_GET['eid']))
 
 include "to.php";
 
-$d = new  item();
-$items = $d->getall();
+
 
 
 include_once("c_category.php");
@@ -63,18 +65,19 @@ $brands = $d->getall();
                         <?php
                         if(isset($_GET['eid']))
                         {
-                           echo " <input type='text' value='$u->iID' name='Iid' > ";
+                           echo " <input type='text' value='$u->iID' name='item_id' > ";
                         }
 
                         ?>
 
         <div class="card-body">
                                     <h4 class="card-title"><b>Item</b></h4>
-                                    
-                                   <div class="form-group row">
+                                   
+
+                                     <div class="form-group row">
                                         <label for="iname" class="col-md-3 m-t-15"- text-right control-label col-form-label>Name</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" value="<?= $u->iname?>" id="iname" name="iname">
+                                                <input type="text" class="form-control" value="<?= $u->iname?>" id="iname" name="iname" placeholder="">
                     
                                             </div>
                                     </div>
@@ -119,7 +122,7 @@ $brands = $d->getall();
                                     <div class="form-group row">
                                         <label for="iuprice" class="col-md-3 m-t-15"- text-right control-label col-form-label>Unit Price</label>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" value="<?= $u->iuprice?>" id="iuprice" name="iuprice">
+                                                <input type="text" class="form-control" value="<?= $u->iuprice?>" id="iuprice" name="iuprice" placeholder="">
                     
                                             </div>
                                     </div>
@@ -176,18 +179,17 @@ $brands = $d->getall();
                                     <div class="form-group row">
                                         <label for="icond" class="col-sm-3 m-t-15" text-right control-label col-form-label">Condition*</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="<?= $u->icond?>" id="icond" name="icond"  placeholder="">
+                                                <input type="text" class="form-control" value="<?= $u->icond?>" id="icond" name="icond"  placeholder="OK">
                                             </div>
                                     </div>
                                 
                                
 
-                                    <div class="border-top">
-                                        <div class="card-body-group-horizontal">
-                                            <input type="submit" class="btn btn-info" value="Add">
-                                    
+                                     <div class="border-top">
+                                        <div class="card-body">
+
+                                            <button type="Submit" class="btn btn-primary">Submit</button>
                                         </div>
-                                       
                                     </div>
 
                 </form>
@@ -229,7 +231,9 @@ $brands = $d->getall();
                                             <td>$toe->ilocation</td>
                                             <td>$toe->icond</td>
                                             <td><a href='item.php?xid=$toe->iID'>Delete</a></td> 
-                                            <td><a href='item.php?eid=$toe->iID'>Edit</a></td>                                                          
+                                            <td><a href='item.php?eid=$toe->iID'>Edit</a></td>  
+
+
                                              </tr>";
 
                                         }
@@ -237,8 +241,8 @@ $brands = $d->getall();
                                     
                                   </tbody>
                             </table>
-                        </div>
-                    </div>    
+                </div>
+            </div>    
      </body>
 
 </html>                      
