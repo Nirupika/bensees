@@ -126,7 +126,7 @@ include "to.php";
                                       <td>$item->sup_tp2</td>
                                       <td>$item->sup_email</td>
                                       <td>$item->sup_mesg</td>
-                                      <td><a href='supplier.php?xid=$item->sup_ID'>Delete</a></td>
+                                      <td onclick='dels($item->sup_ID)'>Delete</td>
                                       <td><a href='supplier.php?eid=$item->sup_ID'>Edit</a></td>
                                     </tr>";
 
@@ -137,6 +137,14 @@ include "to.php";
                             </table>
                         </div>
                     </div>    
+
+<script>
+    function dels(sidx)
+    {
+        if (confirm("Are you sure want to delete this?")==true)
+            location.href="supplier.php?xid="+sidx;
+    }
+</script>
 <?php
 include "foot.php";
 ?>
