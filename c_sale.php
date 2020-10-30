@@ -19,7 +19,7 @@ class sale{
     function register()
     {
         $sql="insert into sale(sale_ID,pname,pqty,pval,discount,ntot,status) 
-             values('$this->sale-ID','$this->pname','$this->pqty','$this->pval','$this->discount','$this->ntot','1')";
+             values('$this->sale_ID','$this->pname','$this->pqty','$this->pval','$this->discount','$this->ntot','1')";
         
         echo $sql; 
         
@@ -30,7 +30,7 @@ class sale{
 
    function update($id)
     {
-        $sql="update sale set pname='$this->$pname', pqty='$this->$pqty', pval='$this->$pval',
+        $sql="update sale set pname='$this->pname', pqty='$this->pqty', pval='$this->pval',
         discount='$this->discount', ntot='$this->ntot','1');
               where sale_ID=$id";
         echo $sql;
