@@ -170,9 +170,9 @@ include("topadmin.php");
 		var dis= (parseFloat(tot) * parseFloat(pd)/100).toFixed(2); //Calculate discount
 		var ntot=parseFloat(tot)-parseFloat(dis).toFixed(2); //Calculate net total
 	
-		$("#tbody").append("<tr><td>" + pn + "</td><td>" + pq + "</td><td>" + pv + "</td><td class='tot'> " + tot + "</td><td>" + pd + "</td><td class='dis'> " + dis + "</td><td><input type='text' id='ntot' readonly='readonly' name='ntot[]'' value='" +ntot+ "'></td><td onclick='del(this)'>Delete</td></tr>");
+		$("#tbody").append("<tr><td>" + pn + "</td><td>" + pq + "</td><td>" + pv + "</td><td class='tot'> " + tot + "</td><td>" + pd + "</td><td class='dis'> " + dis + "</td><td class='ntot'> " + ntot + "</td><td onclick='del(this)'>Delete</td></tr>");
 
-
+//<input type='text' id='ntot' readonly='readonly' name='ntot[]'' value='" +ntot+ "'>
 	}
 	
 	
@@ -216,7 +216,7 @@ include("topadmin.php");
 	function cal_ntot(){
 		netot=0;
 		
-		var nt= $("(.ntot.val)text");
+		var nt= $(".ntot");
 		$.each(nt,function(i,item){
 			
 			netot= netot+ parseFloat($(nt[i]).html()) ;
