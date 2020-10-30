@@ -1,77 +1,94 @@
 <?php
 include_once("config.php");
-class sales{
+class sale{
 	public $sale_ID;
-    public $sale_date;
-    public $sale_discount;
-    public $sale_netsales;
-    public $sale_status;
+    public $pname;
+    public $pqty;
+    public $pval;
+    public $discount;
+    public $ntot;
+    public $status;
 	
 
 	private $db;
 	
-
-
-    function update($id)
+    function __construct()
     {
-        $sql="update sales set sale_id='$this->$sale_ID', sale_dadte='$this->sale_date',
-        sale_discount='$this->sale_discount', sale_netsales='$this->sale_netsales', sale_status='$this->sale_status');
+        $this->db=new mysqli(server,username,password,dbname);
+    }
+    function register()
+    {
+        $sql="insert into sale(sale_ID,pname,pqty,pval,discount,ntot,status) 
+             values('$this->sale-ID','$this->pname','$this->pqty','$this->pval','$this->discount','$this->ntot','1')";
+        
+        echo $sql; 
+        
+        $this->db->query($sql);
+        return true;
+    }
+
+
+   function update($id)
+    {
+        $sql="update sale set pname='$this->$pname', pqty='$this->$pqty', pval='$this->$pval',
+        discount='$this->discount', ntot='$this->ntot','1');
               where sale_ID=$id";
-        //echo $sql;
+        echo $sql;
 
         $this->db->query($sql);
         return true;
     }
 
 
-	function remove($pro_id)
+	function remove($sale_id)
     {
-		$sql="update sales set sale_status='del' where sale_ID=$sale_id";
+		$sql="update sale set status='del' where sale_ID=$sale_id";
 		
-		//echo $sql;
+		echo $sql;
 		
 		$this->db->query($sql);
 		return true;
 	}
-	function change_pw()
-    {
-		
-	}
+	
 	function getbyid($id)
     {
-        $sql = "select * from sales where sale_status='act' and sale_ID=$sale_id";
+        $sql = "select * from sale where status='1' and sale_ID=$id";
         $res = $this->db->query($sql);
 
         $row = $res->fetch_array();
-        $u = new sales();
+        $u = new sale();
         $u->sale_ID =$row['sale_ID'];
-        $u->sale_date= $row['sale_date'];
-        $u->sale_discount= $row['sale_discount'];
-        $u->sale_netsales= $row['sale_netsales'];
-        $u->sale_status = $row['sale_status'];
+        $u->pname= $row['pname'];
+        $u->pqty= $row['pqty'];
+        $u->pval= $row['pval'];
+        $u->discount= $row['discount'];
+        $u->ntot= $row['ntot'];
+        $u->status = $row['status'];
         
-        return $true;
+        return $u;
     }
 
    
 
 	function getall()
     {
-        $sql="select * from saleints where sale_status='act'";
-        $row = $res->fetch_array();
+        $sql="select * from sale where status='1'";
+        $res = $this->db->query($sql);
+        $ar=array();
         
-        
-		$res = $this->db->query($sql);
-		$ar=array();
 		while($row=$res->fetch_array()){
-            $u = new sales();
-            $u->sale_ID =$row['sale_ID'];
-            $u->sale_date= $row['sale_date'];
-            $u->sale_discount= $row['sale_discount'];
-            $u->sale_netsales= $row['sale_netsales'];
-            $u->sale_status = $row['sale_status'];
-       
-		
+        $u = new sale();
+
+        $u->sale_ID =$row['sale_ID'];
+        $u->pname= $row['pname'];
+        $u->pqty= $row['pqty'];
+        $u->pval= $row['pval'];
+        $u->discount= $row['discount'];
+        $u->ntot= $row['ntot'];
+        $u->status = $row['status'];   
+    
+         $ar[]=$u;
+		}
 		
 		return $ar;
 	}
