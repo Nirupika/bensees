@@ -3,15 +3,27 @@
 include_once("c_sale.php");
 $u = new  sale();
 $arr = $u->getall();
-if(isset($_POST["pname"]))
+if(isset($_POST["pqty"]))
 {
-
+	
         $u->pname = $_POST['pname'];
         $u->pqty = $_POST['pqty'];
         $u->pval = $_POST['pval'];
         $u->discount = $_POST['discount'];
         $u->ntot = $_POST['ntot']; 
+
+
+    if(isset($_POST["sales_id"]))
+    {
+        $u->update($_POST["sales_id"]);
+
+    }else
+    {
+
+        $u->register();
+    }
     
+
 }
 
 $d = new  sale();
@@ -112,10 +124,9 @@ include("topadmin.php");
 
 </table>
 	
-<div class="form-group col-sm-2">
-    <label for="button"></label>
-    <input type="text" class="form-control btn btn-info" onclick="save()"; id="btnsave" value="save"  >
-  </div>
+		<div class="card-body">
+            <button type="Submit" class="btn btn-primary">Submit</button>
+        </div>
 	
 </form>
  </body>
